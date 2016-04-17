@@ -41,7 +41,15 @@
 					<label for="mmol_form">mmol</label>
 				</fieldset>
 			</div>
-
+			<div data-role="fieldcontain">
+						<legend><strong>Insulin increment:</strong></legend>
+				<label for="insulinincrement">Increment for insulin options on watch</label>
+				<select  name="insulinincrement" id="insulinincrement">
+					<option value="50">0.5</option>
+					<option value="1">0.01</option>
+					<option value="5">0.05</option>
+				</select>
+			</div>
 			<div data-role="fieldcontain">
 				<legend><strong>Enter Data Endpoint:</strong></legend>
 				<input type="text" name="endpoint" id="endpoint" autocapitalize="off"
@@ -101,7 +109,8 @@
 						'pebblename' : $("#pebblename").val(),
 						'secretAPI' : $("#secretAPI").val(),
 						'units' : $('input[name=radio_units]:checked').val(),
-						'hashAPI' : $("#hashAPI").val()
+						'hashAPI' : $("#hashAPI").val(),
+						'insulinincrement' : $("#insulinincrement option:selected").val()						
 					}
 					// fix for the careportal entry and not being able to put special characters in names
 					//if (options.units == 'mgdl')
@@ -133,6 +142,7 @@
 					$("input[value='mgdl']").attr("checked",true).checkboxradio("refresh");
 					$("#secretAPI").val(opts && opts.secretAPI ? opts.secretAPI : '');
 					$("#hashAPI").val(opts && opts.hashAPI ? opts.hashAPI : '');
+					$("#insulinincrement").val('5').selectmenu("refresh");									
 					document.getElementById('mgdl_form').style.display = 'block';
 					document.getElementById('mmol_form').style.display = 'none';
 				  }
@@ -152,6 +162,7 @@
 						$("#pebblename").val(opts && opts.pebblename ? opts.pebblename : '');
 						$("#secretAPI").val(opts && opts.secretAPI ? opts.secretAPI : '');
 						$("#hashAPI").val(opts && opts.hashAPI ? opts.hashAPI : '');
+						$("#insulinincrement").val(opts.insulinincrement).selectmenu("refresh");
 						if (opts.units == 'mgdl_form'){
 							$("input[value='" + opts.units + "']").attr("checked",true).checkboxradio("refresh");
 							document.getElementById('mgdl_form').style.display = 'block';
